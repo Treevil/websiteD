@@ -1,0 +1,73 @@
+
+
+$spotOne: #26115a;
+$spotTwo: #B18851;
+$spotThree: #ff0000;
+
+.glowButton {
+  position: relative;
+  border-radius: 30px;
+  cursor: pointer;
+  user-select: none;
+  box-shadow:
+          0 0 0 0 $spotTwo,
+          0.5rem 0.5rem 30px mix(black, $spotOne, 50%);
+  transition: box-shadow 0.6s;
+  &:hover {
+    box-shadow:
+            0 0 60px 2px $spotTwo,
+            0.1rem 0.1rem 30px mix(black, $spotOne, 50%);
+  }
+
+}
+
+.elementor-shape {
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  line-height: 0;
+  direction: ltr;
+  bottom: -1px;
+  svg {
+    display: block;
+    width: calc(100% + 1.3px);
+    position: relative;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+}
+
+.elementor-shape-fill {
+  fill: #FFFFFF;
+}
+
+
+.heroHome {
+  background: linear-gradient(-46deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+ .material-symbols-outlined {
+   font-variation-settings:
+           'FILL' 0,
+           'wght' 200,
+           'GRAD' 0,
+           'opsz' 48
+ }
+

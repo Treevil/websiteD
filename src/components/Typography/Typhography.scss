@@ -1,0 +1,25 @@
+@import 'src/globals/variables';
+@import 'src/globals/fonts';
+
+.title1 {
+  font-family: 'Bebas Neue', cursive;
+  text-transform: uppercase;
+  color: $secondary;
+}
+
+.title2 {
+  font-family: 'Bebas Neue', cursive;
+  text-transform: uppercase;
+  color: $secondary;
+}
+
+.title3 {
+  font-family: 'Bebas Neue', cursive;
+  text-transform: uppercase;
+}
+
+
+.paragraph {
+  color: $secondary;
+  font-family: 'Roboto', sans-serif;
+}

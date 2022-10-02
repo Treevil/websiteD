@@ -1,0 +1,141 @@
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import {
+    Container,
+    SimpleGrid,
+    Image,
+    Flex,
+    Heading,
+    Text,
+    Stack,
+    StackDivider,
+    Icon,
+    useColorModeValue,
+    Tooltip, Grid, GridItem, Link,
+} from '@chakra-ui/react';
+import Paragraph from "./Typography/Paragraph";
+import HeaderBlue from "./Typography/HeaderBlue";
+import SubtitleProduct from "./Typography/SubtitleProduct";
+import TextButton from "./Typography/TextButton";
+
+function ProductGrid(
+    {
+        name,
+        subtitle,
+        paragraph1,
+        paragraph2,
+        img,
+        clients,
+        pdfBrochure,
+        moreInfoLink,
+        maxWidthImg = '100%',
+    }
+) {
+    return (
+        <Container maxW={'7xl'} py={12}>
+            <Grid templateColumns='repeat(10, 1fr)' gap={20} my={'4rem'}>
+                <GridItem
+                    colSpan={6}
+                    w='100%'
+                >
+                <Flex justifyContent={'center'}>
+                    <Image
+                        rounded={'md'}
+                        alt={`Immagine presentazione ${name}`}
+                        maxW={maxWidthImg}
+                        src={
+                            img
+                        }
+                    />
+                </Flex>
+                </GridItem>
+                <GridItem
+                    colSpan={4}
+                    w='100%'
+                    display={'flex'}
+                    flexDirection={'column'}
+                    justifyContent={'center'}
+                >
+                <Stack spacing={4}>
+                    <SubtitleProduct>
+                        {subtitle}
+                    </SubtitleProduct>
+                    <HeaderBlue
+                        textProps={{mt: "0 !important"}}
+                        size={'5rem'}
+                    >
+                        {name}
+                    </HeaderBlue>
+                    <Paragraph>
+                        {paragraph1}
+                    </Paragraph>
+                    <Paragraph textProps={{
+                        mt: "2rem",
+                    }}>
+                        {paragraph2}
+                    </Paragraph>
+                    <Heading
+                        fontFamily={"\"B612\", cursive"}
+                        color={'brand.blue'}
+                        textTransform={'uppercase'}
+                        fontSize={'1rem'}
+                        letterSpacing={'2px'}
+                        lineHeight={'1'}
+                        fontWeight={'bold'}
+                    >
+                        I nostri clienti
+                    </Heading>
+                    <Stack
+                        direction={'row'}
+                        alignItems={'center'}
+                        flexWrap={'wrap'}
+                        spacing={1}
+                    >
+
+                        {
+                            clients.map(
+                                (client, index) =>
+                                    <Tooltip key={index} label={client.title}>
+                                        <Image
+                                            src={client.img}
+                                            alt={client.title}
+                                            height={client.height?? '3rem'}
+                                        />
+                                    </Tooltip>
+                            )
+                        }
+                    </Stack>
+                    <TextButton
+                        size={'1rem'}
+                    >
+                        <Link
+                            href={pdfBrochure}
+                            target={'_blank'}
+                        >
+                            Sfoglia la brochure
+                        </Link>
+                    </TextButton>
+                    <TextButton
+                        size={'1rem'}
+                        textProps={{
+                            mt: '0.2rem !important'
+                        }}
+                    >
+                        <Link
+                            href={'/Form'}
+                        >
+                        Ottieni più infomazioni
+                        </Link>
+                    </TextButton>
+                </Stack>
+                </GridItem>
+            </Grid>
+        </Container>
+    )
+}
+
+ProductGrid.propTypes = {}
+
+ProductGrid.defaultProps = {}
+
+export default ProductGrid;

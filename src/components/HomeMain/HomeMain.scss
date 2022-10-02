@@ -1,0 +1,40 @@
+@import "src/globals/variables";
+@import "src/globals/fonts";
+
+.homeMain {
+  background: $primary;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20vh 0;
+  position: relative;
+  .textContainer {
+    .companyName {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 5rem;
+    }
+    .companyMotto {
+      text-transform: uppercase;
+      font-family: 'B612', sans-serif;
+    }
+    .humanText {
+      color: $textGold;
+      margin-right: 0.1rem;
+    }
+  }
+
+}
+
+
+
+
+.shape {
+  width: 100%;
+  height: 80px;
+  background-image: radial-gradient(120% 120px at 50% -30px, $primary 75%, transparent 75%);
+}
+
+svg {
+  width: 100%;
+}

@@ -1,0 +1,103 @@
+@import 'src/globals/variables';
+@import 'src/globals/fonts';
+$small: 500px;
+$breakpoint-tablet: 768px;
+
+
+.mobileNav {
+  .subList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'B612', sans-serif;
+    text-transform: uppercase;
+    background: #fff;
+    width: 100%;
+
+    .sublistItem{
+      padding: .5rem 1rem;
+      text-decoration: none;
+      &:hover {
+        background: #1A032A;
+        color: #fff;
+        a{
+          text-decoration: none;
+        }
+      }
+    }
+    .sublistItem-child {
+      margin-left: 2rem;
+      padding: .5rem;
+      text-transform: capitalize;
+    }
+  }
+}
+
+.navbar {
+  .HamburgerMenuIcon {
+    display: none;
+  }
+  text-align: center;
+  .logo {
+    width: 200px;
+  }
+
+
+  .mainList {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    font-family: 'B612', sans-serif;
+    text-transform: uppercase;
+    li {
+      display: inline;
+      margin: 0 2rem;
+      color: $bgLight;
+      a {
+        color: $bgLight;
+        text-decoration: none;
+        &:hover {
+          color: $textGold;
+
+          text-decoration: underline;
+          text-shadow:
+          0 0 20px $textGold,
+          0 0 35px $textGold,
+          0 0 40px $textGold,
+          0 0 50px $textGold,
+          0 0 75px $textGold;
+          -webkit-animation: glow 1s ease-in-out infinite alternate;
+          -moz-animation: glow 1s ease-in-out infinite alternate;
+          animation: glow 1s ease-in-out infinite alternate;
+        }
+      }
+    }
+  }
+
+
+  @media screen and (max-width: $small) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .HamburgerMenuIcon {
+      float: right;
+      display: block;
+      color: #fff;
+    }
+    .logo {
+      width: 100px;
+    }
+    ul {
+      display: none;
+    }
+  }
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
