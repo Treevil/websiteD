@@ -15,7 +15,6 @@ import ReactTransitionCollapse from 'react-transition-collapse';
 import {useBreakpointValue} from '@chakra-ui/react'
 import {useSpring, animated} from 'react-spring'
 
-const emojis = ["😄", "🤪", "✌️"];
 
 function Navbar(
     {

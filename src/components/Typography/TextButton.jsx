@@ -6,6 +6,7 @@ function TextButton(
     {
         children,
         textProps,
+        onClick,
     }
 ) {
     return (
@@ -20,6 +21,7 @@ function TextButton(
             display={'flex'}
             alignItems={'center'}
             fontWeight={'bold'}
+            onClick={onClick?? null}
         >
             {children}
             <span className="material-symbols-outlined" style={{fontSize: '2rem'}}>navigate_next</span>

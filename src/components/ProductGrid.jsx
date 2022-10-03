@@ -17,7 +17,9 @@ import Paragraph from "./Typography/Paragraph";
 import HeaderBlue from "./Typography/HeaderBlue";
 import SubtitleProduct from "./Typography/SubtitleProduct";
 import TextButton from "./Typography/TextButton";
-
+import {
+    Link as LinkRouter,
+} from "react-router-dom";
 function ProductGrid(
     {
         name,
@@ -32,7 +34,7 @@ function ProductGrid(
     }
 ) {
     return (
-        <Container maxW={'7xl'} py={12}>
+        <Container maxW={'7xl'} py={12} px={12}>
             <Grid templateColumns='repeat(10, 1fr)' gap={20} my={'4rem'}>
                 <GridItem
                     colSpan={6}
@@ -122,7 +124,9 @@ function ProductGrid(
                         }}
                     >
                         <Link
-                            href={'/Form'}
+                            as={LinkRouter}
+                            to={'/Form'}
+                            state={{product: name.charAt(0).toUpperCase() + name.slice(1)}}
                         >
                         Ottieni più infomazioni
                         </Link>

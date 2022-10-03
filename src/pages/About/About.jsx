@@ -26,10 +26,26 @@ function About(
                 maxW='6xl'
                 mt={20}
                 mb={40}
+                padding={{
+                    base: "0 3rem",
+                    xl: 0,
+                }}
             >
-                <Grid templateColumns='repeat(8, 1fr)' gap={6}>
+                <Grid
+                    templateColumns='repeat(8, 1fr)'
+                    gap={{
+                        base: 2,
+                        md: 3,
+                        xl: 6,
+                    }}
+
+                >
                     <GridItem
-                        colSpan={3}
+                        colSpan={{
+                            base: 8,
+                            md: 4,
+                            xl: 3,
+                        }}
                         w='100%'
                         mt={'4rem'}
                     >
@@ -39,7 +55,7 @@ function About(
                                 mb: '2rem'
                             }}
                         >
-                            la nostra
+                            La nostra
                             storia
                         </HeaderBlue>
                         <Paragraph>
@@ -56,16 +72,40 @@ function About(
                             aziendali e per lo sviluppo di sistemi cartografici digitali.
                         </Paragraph>
                     </GridItem>
-                    <GridItem colSpan={2} w='100%'>
+                    <GridItem
+                        colSpan={{
+                            base: 8,
+                            md: 1,
+                            xl: 2,
+                        }}
+                        w='100%'
+                        textAlign={'center'}
+                    >
                         <Image
                             src={LogoUrl}
-                            mt={'-137px'}
+                            margin={{
+                                base: '.75rem auto',
+                                md: '0',
+                                xl: '-137px 0 0 0'
+                            }}
+                            width={{
+                                base: '50%'
+                            }}
                             position={'relative'}
                             zIndex={10}
+                            display={{
+                                base: 'block',
+                                md: 'none',
+                                xl: 'block'
+                            }}
                         />
                     </GridItem>
                     <GridItem
-                        colSpan={3}
+                        colSpan={{
+                            base: 8,
+                            md: 3,
+                            xl: 3,
+                        }}
                         w='100%'
                         display={'flex'}
                         flexDirection={'column'}
@@ -110,11 +150,29 @@ function About(
             />
             <Container
                 maxW='6xl'
-                my={20}
+                my={{
+                    base: 6,
+                    xl: 20,
+                }}
+                padding={{
+                    base: "0 3rem",
+                    xl: 0,
+                }}
             >
-                <Grid templateColumns='repeat(8, 1fr)' gap={6}>
+                <Grid
+                    templateColumns='repeat(8, 1fr)'
+                    gap={{
+                        base: 2,
+                        md: 3,
+                        xl: 6,
+                    }}
+                >
                     <GridItem
-                        colSpan={3}
+                        colSpan={{
+                            base: 8,
+                            md: 4,
+                            xl: 3,
+                        }}
                         w='100%'
                         mt={'4rem'}
                         id={'OurHistory'}
@@ -125,7 +183,7 @@ function About(
                                 mb: '2rem'
                             }}
                         >
-                            la nostra Azienda
+                            La nostra Azienda
                         </HeaderBlue>
                         <Paragraph>
                             Abbiamo scelto di far nascere la nostra azienda a Leinì, vicinissima a Torino, ma immersa nelle campagne.
@@ -139,11 +197,24 @@ function About(
                             mentre la cucina e la sala da pranzo sono garanzia di momenti di pausa e condivisione.
                         </Paragraph>
                     </GridItem>
-                    <GridItem colSpan={2} w='100%' />
-                    <GridItem colSpan={3} w='100%'
-                              display={'flex'}
-                              flexDirection={'column'}
-                              justifyContent={'end'}
+                    <GridItem
+                        colSpan={{
+                            base: 0,
+                            md: 1,
+                            xl: 2,
+                        }}
+                        w='100%'
+                    />
+                    <GridItem
+                        colSpan={{
+                            base: 8,
+                            md: 3,
+                            xl: 3,
+                        }}
+                        w='100%'
+                        display={'flex'}
+                        flexDirection={'column'}
+                        justifyContent={'end'}
 
                     >
                         <HeaderBlue

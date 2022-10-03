@@ -13,10 +13,16 @@ import {
 import Head from 'next/head';
 import TwentyFive from '../asset/25Years.png'
 import mainLogo from '../asset/mainLogo.png'
+import {
+    useNavigate
+} from 'react-router-dom';
+import AnchorLink from 'react-anchor-link-smooth-scroll'
 
 function HeroHome(
     {}
 ) {
+    const navigate = useNavigate();
+
     return (
         <>
             <Box
@@ -32,12 +38,27 @@ function HeroHome(
                     pt={"8rem"}
                     pb={'5rem'}
                     alignItems={'center'}
+
                 >
                     <Box>
                         <Image
                             src={mainLogo}
-                            h={400}
-                            ml={'10rem'}
+                            h={
+                                {
+                                    base: 250,
+                                    md: 350,
+                                    xl: 450,
+                                }
+                            }
+                            ml={
+                                {
+                                    base: "auto",
+                                    md: '8rem',
+                                    xl: '10rem',
+                                }
+                            }
+                            mr={'auto'}
+                            maxWidth={'90%'}
                             my={5}
                             alt={'25 Years anniversary'}
                         />
@@ -50,6 +71,8 @@ function HeroHome(
                         alignSelf={'center'}
                         position={'relative'}
                         pb={'3rem'}
+                        position={'relative'}
+                        zIndex={10}
                     >
                         <Button
                             className={'glowButton'}
@@ -62,27 +85,40 @@ function HeroHome(
                             _hover={{
                                 color: 'brand.secondary',
                                 borderColor: 'brand.secondary',
-                            }}>
+                            }}
+                            onClick={e => {
+                                e.preventDefault();
+                                navigate('/Form');
+                            }}
+                        >
                             SCRIVICI
                         </Button>
+
                         <Button
+                            className={'glowButton'}
                             bg={'transparent'}
                             color={'brand.white'}
                             border={'1px solid white'}
                             rounded={'full'}
                             px={8}
+                            mr={8}
                             _hover={{
                                 color: 'brand.secondary',
                                 borderColor: 'brand.secondary',
-                            }}>
-                            ESPLORA
+                            }}
+                        >
+
+                            <AnchorLink href={'#banner'}>
+                                ESPLORA
+                            </AnchorLink>
                         </Button>
+
                     </Stack>
                 </Stack>
                 <div className="elementor-shape elementor-shape-bottom" data-negative="true">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
                         <path className="elementor-shape-fill"
-                              d="M500,97C126.7,96.3,0.8,19.8,0,0v100l1000,0V1C1000,19.4,873.3,97.8,500,97z" />
+                              d="M500,97C126.7,96.3,0.8,19.8,0,0v100l1000,0V1C1000,19.4,873.3,97.8,500,97z"/>
                     </svg>
                 </div>
 

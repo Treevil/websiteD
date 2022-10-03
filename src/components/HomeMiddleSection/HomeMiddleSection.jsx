@@ -20,7 +20,6 @@ import './HomeMiddleSection.scss'
 import Paragraph from "../Typography/Paragraph";
 import HeaderBlue from "../Typography/HeaderBlue";
 
-
 function IconLink(
     {
         title,
@@ -93,9 +92,9 @@ function HomeMiddleSection(
 
     return (
         <Flex
+            id={'banner'}
             w={'full'}
-
-            h={'700px'}
+            minH={'700px'}
             backgroundImage={
                 bgImage
             }
@@ -105,12 +104,18 @@ function HomeMiddleSection(
             color={'brand.white'}
             backgroundPosition={'center center'}
             p={'0 4rem'}
+
         >
             <Container
                 my={20}
                 maxW='8xl'
                 display={'flex'}
-
+                flexDirection={
+                    {
+                        base: 'column',
+                        md: 'row'
+                    }
+                }
             >
             <VStack
                 w={'40%'}

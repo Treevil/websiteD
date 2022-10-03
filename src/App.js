@@ -1,10 +1,9 @@
 import {ChakraProvider} from '@chakra-ui/react';
 import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
     createBrowserRouter,
-    RouterProvider, useLocation,
+    RouterProvider,
+    useLocation,
+    Link,
 } from "react-router-dom";
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
@@ -36,6 +35,9 @@ import WorkWithUs from "./pages/Contact/WorkWithUs";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Page404 from "./pages/Page404";
+
+
+
 
 const router = createBrowserRouter([
     {
@@ -76,7 +78,6 @@ const router = createBrowserRouter([
 
 
 function App() {
-
     return (
         <div className="App">
             <ChakraProvider theme={theme}>

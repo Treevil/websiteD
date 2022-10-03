@@ -19,7 +19,12 @@ function Home() {
                 mb={'7rem'}
             >
                 <Stack
-                    direction={'row'}
+                    flexDirection={{
+                        base: 'column',
+                        md: 'row',
+                    }}
+
+                    alignItems={'center'}
                 >
                     {
                         homeCards.map((topic,index) => {
