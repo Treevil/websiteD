@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import emailjs from '@emailjs/browser';
 import PagesHero from "../../components/PagesHero/PagesHero";
 import HeroImg from "../../asset/heroImg/building.png";
@@ -16,13 +16,15 @@ import {
     SimpleGrid,
     RadioGroup,
     Radio,
-    Switch, Spinner, Collapse, Alert, AlertIcon, CloseButton, AlertTitle, AlertDescription,
+    Switch, Spinner, Collapse, Alert, AlertIcon, CloseButton, AlertTitle, AlertDescription, Grid, GridItem,
 } from "@chakra-ui/react";
 import HeaderBlue from "../../components/Typography/HeaderBlue";
 import Paragraph from "../../components/Typography/Paragraph";
 import TextInput from "../../components/Inputs/TextInput";
 import DatePicker from 'react-date-picker';
 import TextButton from "../../components/Typography/TextButton";
+import {workWithUsContent} from "../../config/content/WorkWithUs.content";
+import {emailConfig} from "../../config/email.config";
 
 const initFormState = {
     firstName: '',
@@ -89,11 +91,8 @@ function WorkWithUs(
             return setAlertData({
                     show: true,
                     error: true,
-                    title: 'Errore dati',
-                    subtitle: <>
-                        Uno o più cambi obbligatori omessi. <br/>
-                        Completare il form e riprovare
-                    </>,
+                    title: workWithUsContent.failAlert.missingMandatoryFields.title,
+                    subtitle: workWithUsContent.failAlert.missingMandatoryFields.subtitle,
                     type: 'error',
                 }
             )
@@ -107,11 +106,8 @@ function WorkWithUs(
             return setAlertData({
                     show: true,
                     error: true,
-                    title: 'Errore formato dati',
-                    subtitle: <>
-                        Uno o più cambi sono in un formato non corretto <br/>
-                        Controlla i dati e riprova
-                    </>,
+                    title: workWithUsContent.failAlert.wrongFormat.title,
+                    subtitle: workWithUsContent.failAlert.wrongFormat.subtitle,
                     type: 'error',
                 }
             )
@@ -125,19 +121,19 @@ function WorkWithUs(
     const sendEmail = _ => {
 
         emailjs.send(
-            'service_unbce8d',
-            'template_zoax80e',
+            emailConfig.serviceId,
+            emailConfig.templateWorkForUs,
             formValues,
-            'vbpXCpvI5nr6MfOpf'
+            emailConfig.publicKey,
         )
             .then((result) => {
                 console.log(result.text);
                 setAlertData({
                         show: true,
                         error: false,
-                        title: 'Messaggio Inviato',
+                        title: workWithUsContent.successAlert.title,
                         subtitle: <>
-                            Grazie per averci inviato la candidatura, ti risponderemo al più presto!
+                            {workWithUsContent.successAlert.subtitle}
                             <br/>
                             <br/>
                             <br/>
@@ -174,7 +170,6 @@ function WorkWithUs(
     }
 
 
-
     return (
         <div className={'workWithUs-page'}>
             <PagesHero
@@ -189,321 +184,339 @@ function WorkWithUs(
             >
                 <Flex>
                     <Box
-                        color="white"
-                        borderRadius="lg"
                         p={4}
-                       >
-                        <Box p={4}>
-                            <Wrap spacing={{base: 20, sm: 3, md: 5, lg: 20}}>
-                                <WrapItem alignItems={'center'}>
-                                    <Box>
-                                        <HeaderBlue size={'4xl'}>
-                                            Compila il form e <br/> unisciti a nOI!
-                                        </HeaderBlue>
-                                        <Paragraph
-                                            textProps={{
-                                                py: 4,
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                            }}
+                    >
+                        <Grid templateColumns='repeat(6, 1fr)' gap={6}>
+                            <GridItem
+                                colSpan={{
+                                    base: 6,
+                                    md: 3,
+                                }}
+                                order={{
+                                    base: 2,
+                                    md: 1,
+                                }}
+                                w='100%'
+                                alignItems={'center'}
+                                justifyContent={{
+                                    base: 'flex-start',
+                                    md: 'center',
+                                }}
+                                display={'flex'}
+                            >
+                                <Box>
+                                    <HeaderBlue size={'4xl'}>
+                                        Compila il form e <br/> unisciti a nOI!
+                                    </HeaderBlue>
+                                    <Paragraph
+                                        textProps={{
+                                            py: 4,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                        }}
+                                    >
+                                        Siamo sempre alla ricerca di <br/>
+                                        persone intraprendenti e <br/>
+                                        appassionate, capaci di lavorare in gruppo e <br/>
+                                        in ambienti dinamici.
+
+                                    </Paragraph>
+                                </Box>
+                            </GridItem>
+                            <GridItem
+                                colSpan={{
+                                    base: 6,
+                                    md: 3,
+                                }}
+                                order={{
+                                    base: 1,
+                                    md: 2,
+                                }}
+                                w='100%'
+                                alignItems={'center'}
+                                display={'flex'}
+                            >
+                                <Box bg="white" borderRadius="lg">
+                                    <Box color="#0B0E3F">
+                                        <Collapse
+                                            in={alertData.show}
+                                            animateOpacity
                                         >
-                                            Siamo sempre alla ricerca di <br/>
-                                            persone intraprendenti e <br/>
-                                            appassionate, capaci di lavorare in gruppo e <br/>
-                                            in ambienti dinamici.
-
-                                        </Paragraph>
-                                    </Box>
-                                </WrapItem>
-                                <WrapItem
-                                    alignItems={'flex-start'}
-                                >
-                                    <Box bg="white" borderRadius="lg">
-                                        <Box m={8} color="#0B0E3F">
-                                            <Collapse
-                                                in={alertData.show}
-                                                animateOpacity
+                                            <Alert
+                                                status={alertData.type}
+                                                variant='subtle'
+                                                flexDirection='column'
+                                                alignItems='center'
+                                                justifyContent='center'
+                                                textAlign='center'
+                                                position={'relative'}
                                             >
-                                                <Alert
-                                                    status={alertData.type}
-                                                    variant='subtle'
-                                                    flexDirection='column'
-                                                    alignItems='center'
-                                                    justifyContent='center'
-                                                    textAlign='center'
-                                                    position={'relative'}
+                                                <AlertIcon boxSize='40px' mr={0}/>
+                                                {
+                                                    alertData.error &&
+                                                    <CloseButton
+                                                        position={'absolute'}
+                                                        top={'20px'}
+                                                        right={'60px'}
+                                                        onClick={_ => setAlertData(curr => {
+                                                            return {...curr, show: false}
+                                                        })}
+                                                    />
+                                                }
+
+                                                <AlertTitle mt={4} mb={1} fontSize='lg'>
+                                                    {alertData.title}
+                                                </AlertTitle>
+                                                <AlertDescription maxWidth='sm' p={'1rem'}>
+                                                    {alertData.subtitle}
+                                                </AlertDescription>
+
+                                            </Alert>
+                                        </Collapse>
+                                        {
+                                            (!alertData.show || alertData.error) &&
+                                            <VStack spacing={5} alignItems={'flex-start'}>
+                                                <Stack
+                                                    direction={'row'}
+                                                    spacing={2}
                                                 >
-                                                    <AlertIcon boxSize='40px' mr={0}/>
-                                                    {
-                                                        alertData.error &&
-                                                        <CloseButton
-                                                            position={'absolute'}
-                                                            top={'20px'}
-                                                            right={'60px'}
-                                                            onClick={_ => setAlertData(curr => {
-                                                                return {...curr, show: false}
-                                                            })}
-                                                        />
-                                                    }
+                                                    <TextInput
+                                                        id={'name'}
+                                                        label={'Nome*'}
+                                                        value={formValues.firstName}
+                                                        validityCheck={txt => txt.length > 0}
+                                                        errorMsg={'Il nome è un campo obbligatorio'}
+                                                        setValue={
+                                                            v => setFormValues(curr => {
+                                                                return {
+                                                                    ...curr,
+                                                                    firstName: v,
+                                                                }
+                                                            })
+                                                        }
+                                                    />
+                                                    <TextInput
+                                                        id={'lastName'}
+                                                        label={'Cognome*'}
+                                                        value={formValues.lastName}
+                                                        validityCheck={txt => txt.length > 0}
+                                                        errorMsg={'Il Cognome è un campo obbligatorio'}
+                                                        setValue={
+                                                            v => setFormValues(curr => {
+                                                                return {
+                                                                    ...curr,
+                                                                    lastName: v,
+                                                                }
+                                                            })
+                                                        }
+                                                    />
+                                                </Stack>
+                                                <Stack
+                                                    direction={'row'}
+                                                    spacing={2}
+                                                >
+                                                    <TextInput
+                                                        id={'email'}
+                                                        label={'E-mail*'}
+                                                        value={formValues.email}
+                                                        validityCheck={email => checkEmail(email)
+                                                        }
+                                                        errorMsg={'L\'email inserita non è valida'}
+                                                        setValue={
+                                                            v => setFormValues(curr => {
+                                                                return {
+                                                                    ...curr,
+                                                                    email: v,
+                                                                }
+                                                            })
+                                                        }
+                                                    />
+                                                    <TextInput
+                                                        id={'phone'}
+                                                        label={'Telefono'}
+                                                        value={formValues.phone}
+                                                        validityCheck={phone => {
+                                                            return checkPhone(phone)
+                                                        }}
+                                                        errorMsg={'Telefono inserito non valido'}
+                                                        setValue={
+                                                            v => setFormValues(curr => {
+                                                                return {
+                                                                    ...curr,
+                                                                    phone: v,
+                                                                }
+                                                            })
+                                                        }
+                                                    />
+                                                </Stack>
+                                                <Stack
+                                                    direction={'row'}
+                                                    spacing={2}
+                                                    w={'100%'}
+                                                >
 
-                                                    <AlertTitle mt={4} mb={1} fontSize='lg'>
-                                                        {alertData.title}
-                                                    </AlertTitle>
-                                                    <AlertDescription maxWidth='sm' p={'1rem'}>
-                                                        {alertData.subtitle}
-                                                    </AlertDescription>
-
-                                                </Alert>
-                                            </Collapse>
-                                            {
-                                                (!alertData.show || alertData.error) &&
-                                                <VStack spacing={5} alignItems={'flex-start'}>
+                                                    <TextInput
+                                                        id={'residence'}
+                                                        label={'Residenza'}
+                                                        value={formValues.location}
+                                                        setValue={
+                                                            v => setFormValues(curr => {
+                                                                return {
+                                                                    ...curr,
+                                                                    location: v,
+                                                                }
+                                                            })
+                                                        }
+                                                    />
+                                                    <TextInput
+                                                        id={'bornDate'}
+                                                        label={'Data di nascita'}
+                                                        type={'date'}
+                                                        value={formValues.bornDate}
+                                                        validityCheck={date => {
+                                                            return checkDate(date)
+                                                        }}
+                                                        errorMsg={'L\'età inserita non sembra corretta'}
+                                                        setValue={
+                                                            v => setFormValues(curr => {
+                                                                return {
+                                                                    ...curr,
+                                                                    bornDate: v,
+                                                                }
+                                                            })
+                                                        }
+                                                    />
+                                                </Stack>
+                                                <Stack
+                                                    direction='column'
+                                                >
+                                                    <FormLabel
+                                                        fontFamily={'\'Roboto\', sans-serif'}
+                                                        margin={'0.2rem'}
+                                                    >
+                                                        Per cosa ci stai contattando?*
+                                                    </FormLabel>
+                                                    <RadioGroup
+                                                        value={formValues.typeOfWork}
+                                                        onChange={
+                                                            v => setFormValues(curr => {
+                                                                return {
+                                                                    ...curr,
+                                                                    typeOfWork: v,
+                                                                }
+                                                            })
+                                                        }
+                                                    >
+                                                        <SimpleGrid
+                                                            columns={2}
+                                                            spacing={5}
+                                                        >
+                                                            <Radio
+                                                                value={'Stage'}
+                                                                color={'brand.primary'}
+                                                            >
+                                                                Stage
+                                                            </Radio>
+                                                            <Radio
+                                                                color={'brand.primary'}
+                                                                value={'Dipendente'}
+                                                            >
+                                                                Lavoro Dipendente
+                                                            </Radio>
+                                                            <Radio
+                                                                color={'brand.primary'}
+                                                                value={'PCTO'}
+                                                            >
+                                                                PCTO
+                                                            </Radio>
+                                                            <Radio
+                                                                value={'Lavoro con P.iva'}
+                                                                color={'brand.primary'}
+                                                            >
+                                                                Lavoro con P.iva
+                                                            </Radio>
+                                                        </SimpleGrid>
+                                                    </RadioGroup>
+                                                </Stack>
+                                                <Stack
+                                                    direction='column'
+                                                >
+                                                    <FormLabel
+                                                        fontFamily={'\'Roboto\', sans-serif'}
+                                                        margin={'0.2rem'}
+                                                    >
+                                                        Categoria protetta (legge 68/99) </FormLabel>
+                                                    <Switch
+                                                        size='lg'
+                                                        value={formValues.protectedCategory}
+                                                        onChange={
+                                                            v => setFormValues(curr => {
+                                                                return {
+                                                                    ...curr,
+                                                                    protectedCategory: v,
+                                                                }
+                                                            })
+                                                        }
+                                                    />
+                                                </Stack>
+                                                <FormControl id={'message'}>
+                                                    <FormLabel
+                                                        fontFamily={'\'Roboto\', sans-serif'}
+                                                        margin={'0.2rem'}
+                                                    >
+                                                        {'Parlaci di te e delle tue esperienze*'}
+                                                    </FormLabel>
                                                     <Stack
                                                         direction={'row'}
-                                                        spacing={2}
+                                                        spacing={0}
+                                                        alignItems={'stretch'}
                                                     >
-                                                        <TextInput
-                                                            id={'name'}
-                                                            label={'Nome*'}
-                                                            value={formValues.firstName}
-                                                            validityCheck={txt => txt.length > 0}
-                                                            errorMsg={'Il nome è un campo obbligatorio'}
-                                                            setValue={
-                                                                v => setFormValues(curr => {
-                                                                    return {
-                                                                        ...curr,
-                                                                        firstName: v,
+                                                        <InputGroup
+                                                            background="brand.bgInput"
+                                                            border={"0px solid transparent"}
+                                                        >
+                                                            <Textarea
+                                                                size='sm'
+                                                                resize={'none'}
+                                                                value={formValues.message}
+                                                                onChange={
+                                                                    event => {
+                                                                        const {
+                                                                            value
+                                                                        } = event.target;
+                                                                        setFormValues(curr => {
+                                                                            return {
+                                                                                ...curr,
+                                                                                message: value,
+                                                                            }
+                                                                        })
                                                                     }
-                                                                })
-                                                            }
-                                                        />
-                                                        <TextInput
-                                                            id={'lastName'}
-                                                            label={'Cognome*'}
-                                                            value={formValues.lastName}
-                                                            validityCheck={txt => txt.length > 0}
-                                                            errorMsg={'Il Cognome è un campo obbligatorio'}
-                                                            setValue={
-                                                                v => setFormValues(curr => {
-                                                                    return {
-                                                                        ...curr,
-                                                                        lastName: v,
-                                                                    }
-                                                                })
-                                                            }
-                                                        />
-                                                    </Stack>
-                                                    <Stack
-                                                        direction={'row'}
-                                                        spacing={2}
-                                                    >
-                                                        <TextInput
-                                                            id={'email'}
-                                                            label={'E-mail*'}
-                                                            value={formValues.email}
-                                                            validityCheck={email => checkEmail(email)
-                                                            }
-                                                            errorMsg={'L\'email inserita non è valida'}
-                                                            setValue={
-                                                                v => setFormValues(curr => {
-                                                                    return {
-                                                                        ...curr,
-                                                                        email: v,
-                                                                    }
-                                                                })
-                                                            }
-                                                        />
-                                                        <TextInput
-                                                            id={'phone'}
-                                                            label={'Telefono'}
-                                                            value={formValues.phone}
-                                                            validityCheck={phone => {
-                                                                return checkPhone(phone)
+                                                                }
+                                                            />
+                                                        </InputGroup>
+                                                        <Button
+                                                            height={'auto'}
+                                                            variant="solid"
+                                                            bg="brand.primary"
+                                                            color="white"
+                                                            _hover={{
+                                                                bg: "brand.secondary"
                                                             }}
-                                                            errorMsg={'Telefono inserito non valido'}
-                                                            setValue={
-                                                                v => setFormValues(curr => {
-                                                                    return {
-                                                                        ...curr,
-                                                                        phone: v,
-                                                                    }
-                                                                })
-                                                            }
-                                                        />
+                                                            onClick={onSendClick}
+                                                            disabled={isLoading}
+                                                        >
+                                                            {isLoading ? <Spinner/> : "Fatti valere!"}
+
+                                                        </Button>
                                                     </Stack>
-                                                    <Stack
-                                                        direction={'row'}
-                                                        spacing={2}
-                                                        w={'100%'}
-                                                    >
 
-                                                        <TextInput
-                                                            id={'residence'}
-                                                            label={'Residenza'}
-                                                            value={formValues.location}
-                                                            setValue={
-                                                                v => setFormValues(curr => {
-                                                                    return {
-                                                                        ...curr,
-                                                                        location: v,
-                                                                    }
-                                                                })
-                                                            }
-                                                        />
-                                                        <TextInput
-                                                            id={'bornDate'}
-                                                            label={'Data di nascita'}
-                                                            type={'date'}
-                                                            value={formValues.bornDate}
-                                                            validityCheck={date => {
-                                                                return checkDate(date)
-                                                            }}
-                                                            errorMsg={'L\'età inserita non sembra corretta'}
-                                                            setValue={
-                                                                v => setFormValues(curr => {
-                                                                    return {
-                                                                        ...curr,
-                                                                        bornDate: v,
-                                                                    }
-                                                                })
-                                                            }
-                                                        />
-                                                    </Stack>
-                                                    <Stack
-                                                        direction='column'
-                                                    >
-                                                        <FormLabel
-                                                            fontFamily={'\'Roboto\', sans-serif'}
-                                                            margin={'0.2rem'}
-                                                        >
-                                                            Per cosa ci stai contattando?*
-                                                        </FormLabel>
-                                                        <RadioGroup
-                                                            value={formValues.typeOfWork}
-                                                            onChange={
-                                                                v => setFormValues(curr => {
-                                                                    return {
-                                                                        ...curr,
-                                                                        typeOfWork: v,
-                                                                    }
-                                                                })
-                                                            }
-                                                        >
-                                                            <SimpleGrid
-                                                                columns={2}
-                                                                spacing={5}
-                                                            >
-                                                                <Radio
-                                                                    value={'Stage'}
-                                                                    color={'brand.primary'}
-                                                                >
-                                                                    Stage
-                                                                </Radio>
-                                                                <Radio
-                                                                    color={'brand.primary'}
-                                                                    value={'Dipendente'}
-                                                                >
-                                                                    Lavoro Dipendente
-                                                                </Radio>
-                                                                <Radio
-                                                                    color={'brand.primary'}
-                                                                    value={'PCTO'}
-                                                                >
-                                                                    PCTO
-                                                                </Radio>
-                                                                <Radio
-                                                                    value={'Lavoro con P.iva'}
-                                                                    color={'brand.primary'}
-                                                                >
-                                                                    Lavoro con P.iva
-                                                                </Radio>
-                                                            </SimpleGrid>
-                                                        </RadioGroup>
-                                                    </Stack>
-                                                    <Stack
-                                                        direction='column'
-                                                    >
-                                                        <FormLabel
-                                                            fontFamily={'\'Roboto\', sans-serif'}
-                                                            margin={'0.2rem'}
-                                                        >
-                                                            Categoria protetta (legge 68/99) </FormLabel>
-                                                        <Switch
-                                                            size='lg'
-                                                            value={formValues.protectedCategory}
-                                                            onChange={
-                                                                v => setFormValues(curr => {
-                                                                    return {
-                                                                        ...curr,
-                                                                        protectedCategory: v,
-                                                                    }
-                                                                })
-                                                            }
-                                                        />
-                                                    </Stack>
-                                                    <FormControl id={'message'}>
-                                                        <FormLabel
-                                                            fontFamily={'\'Roboto\', sans-serif'}
-                                                            margin={'0.2rem'}
-                                                        >
-                                                            {'Parlaci di te e delle tue esperienze*'}
-                                                        </FormLabel>
-                                                        <Stack
-                                                            direction={'row'}
-                                                            spacing={0}
-                                                            alignItems={'stretch'}
-                                                        >
-                                                            <InputGroup
-                                                                background="brand.bgInput"
-                                                                border={"0px solid transparent"}
-                                                            >
-                                                                <Textarea
-                                                                    size='sm'
-                                                                    resize={'none'}
-                                                                    value={formValues.message}
-                                                                    onChange={
-                                                                        event => {
-                                                                            const {
-                                                                                value
-                                                                            } = event.target;
-                                                                            setFormValues(curr => {
-                                                                                return {
-                                                                                    ...curr,
-                                                                                    message: value,
-                                                                                }
-                                                                            })
-                                                                        }
-                                                                    }
-                                                                />
-                                                            </InputGroup>
-                                                            <Button
-                                                                height={'auto'}
-                                                                variant="solid"
-                                                                bg="brand.primary"
-                                                                color="white"
-                                                                _hover={{
-                                                                    bg: "brand.secondary"
-                                                                }}
-                                                                onClick={onSendClick}
-                                                                disabled={isLoading}
-                                                            >
-                                                                {isLoading ? <Spinner/> : "Fatti valere!"}
-
-                                                            </Button>
-                                                        </Stack>
-
-                                                    </FormControl>
-
-                                                    <FormControl id="name" float="right">
-
-                                                    </FormControl>
-                                                </VStack>
-                                            }
-                                        </Box>
+                                                </FormControl>
+                                            </VStack>
+                                        }
                                     </Box>
-                                </WrapItem>
-                            </Wrap>
-                        </Box>
+                                </Box>
+                            </GridItem>
+                        </Grid>
                     </Box>
                 </Flex>
             </Container>

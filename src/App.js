@@ -35,44 +35,51 @@ import WorkWithUs from "./pages/Contact/WorkWithUs";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Page404 from "./pages/Page404";
-
+import Root from "./pages/Root";
 
 
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Home/>,
-        errorElement: <Page404/>
+        element: <Root/>,
+        errorElement: <Page404/>,
+        children: [
+            {
+                path: "/",
+                element: <Home />,
+            },
+            {
+                path: "/about",
+                element: <About/>
+            },
+            {
+                path: "/about2",
+                element: <About2 />
+            },
+            {
+                path: "/Security",
+                element: <Security/>
+            },
+            {
+                path: "/SmartCity",
+                element: <SmartCity/>
+            },
+            {
+                path: "/logistic",
+                element: <Logistic/>
+            },
+            {
+                path: "/Form",
+                element: <Form/>
+            },
+            {
+                path: "/WorkWithUs",
+                element: <WorkWithUs/>
+            },
+        ],
     },
-    {
-        path: "/about",
-        element: <About/>
-    },
-    {
-        path: "/about2",
-        element: <About2 />
-    },
-    {
-        path: "/Security",
-        element: <Security/>
-    },
-    {
-        path: "/SmartCity",
-        element: <SmartCity/>
-    },
-    {
-        path: "/logistic",
-        element: <Logistic/>
-    },
-    {
-        path: "/Form",
-        element: <Form/>
-    },
-    {
-        path: "/WorkWithUs",
-        element: <WorkWithUs/>
-    },
+
 ]);
 
 
@@ -81,9 +88,7 @@ function App() {
     return (
         <div className="App">
             <ChakraProvider theme={theme}>
-                <Navbar items={menuElements}/>
                     <RouterProvider router={router}/>
-                <Footer/>
             </ChakraProvider>
         </div>
     );

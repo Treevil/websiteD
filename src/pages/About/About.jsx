@@ -6,13 +6,14 @@ import {
     GridItem,
     Text,
     Container,
-    Heading, Image, Flex,
+    Heading, Image, Flex, Link, Box,
 } from '@chakra-ui/react'
 import LogoUrl from '../../asset/loghi/Logo_piccolo_blu_trasparente.png';
 
 import Paragraph from "../../components/Typography/Paragraph";
 import HeaderBlue from "../../components/Typography/HeaderBlue";
 import bgPool from "../../asset/heroImg/pool.png";
+import TextButton from "../../components/Typography/TextButton";
 
 function About(
     {}
@@ -47,10 +48,16 @@ function About(
                             xl: 3,
                         }}
                         w='100%'
-                        mt={'4rem'}
+                        mt={{
+                            base: '2rem',
+                            md: '4rem'
+                        }}
                     >
                         <HeaderBlue
-                            size={'6rem'}
+                            size={{
+                                base: '5rem',
+                                md: '6rem'
+                            }}
                             textProps={{
                                 mb: '2rem'
                             }}
@@ -93,11 +100,7 @@ function About(
                             }}
                             position={'relative'}
                             zIndex={10}
-                            display={{
-                                base: 'block',
-                                md: 'none',
-                                xl: 'block'
-                            }}
+                            display='none'
                         />
                     </GridItem>
                     <GridItem
@@ -114,15 +117,15 @@ function About(
                         <HeaderBlue
                             size={'2.5rem'}
                             textProps={{
+                                mt: '2rem',
                                 mb: '2rem'
                             }}
                         >
                             Chi siamo
-
                         </HeaderBlue>
                         <Paragraph>
-                            Divitech è una realtà del Gruppo Elda
-                            Ingegneria, pioniere dell'Information Technology.
+                            Divitech è una realtà del <Link target={'_blank'} href={'https://www.elda.it/'}> Gruppo Elda
+                            Ingegneria</Link>, pioniere dell'Information Technology.
                             Da sempre ci occupiamo di Telematica:
                             alla base di tutti i nostri prodotti, infatti,
                             c'è una forte connessione tra software e i
@@ -131,8 +134,8 @@ function About(
                         <Paragraph textProps={{
                             pt: "2rem"
                         }}>
-                            Nel 2008 abbiamo fondato Tierra insieme a Topcon Positioning per portare la telematica nel campo dell'agricoltura di precisione e del movimento terra.
-                            Grazie alle relazioni commerciali instaurate con Topcon e Sumitomo, la nostra telematica ha raggiunto il Sud-est Asiatico dando vita a Weeo.
+                            Nel 2008 abbiamo fondato <Link target={'_blank'} href={'https://www.tierratelematics.com/'}>Tierra</Link> insieme a <Link target={'_blank'} href={'https://www.topconpositioning.com/it/'}>Topcon Positioning</Link> per portare la telematica nel campo dell'agricoltura di precisione e del movimento terra.
+                            Grazie alle relazioni commerciali instaurate con <Link href={' https://www.topcon.co.jp/en/positioning/'}>Topcon</Link>  e Sumitomo, la nostra telematica ha raggiunto il Sud-est Asiatico dando vita a <Link target={'_blank'} href={'https://weeo.com/'}>Weeo</Link> .
                         </Paragraph>
                     </GridItem>
                 </Grid>
@@ -178,7 +181,10 @@ function About(
                         id={'OurHistory'}
                     >
                         <HeaderBlue
-                            size={'6rem'}
+                            size={{
+                                base: '5rem',
+                                md: '6rem'
+                            }}
                             textProps={{
                                 mb: '2rem'
                             }}
@@ -220,7 +226,7 @@ function About(
                         <HeaderBlue
                             size={'2.5rem'}
                             textProps={{
-                                mb: '2rem'
+                                my: '2rem'
                             }}
                         >
                             il laboratorio
@@ -243,8 +249,20 @@ function About(
                             Non mancano zone relax e spazi in cui bere un caffè, esclusivamente con soluzioni plastic-free.
 
                         </Paragraph>
+
                     </GridItem>
+
                 </Grid>
+                <Box
+                    display={'flex'}
+                    mt={4}
+                >
+                    <TextButton textProps={{ml: 'auto'}}>
+                        <Link href={'/workWithUs'}>
+                            Lavora con noi
+                        </Link>
+                    </TextButton>
+                </Box>
             </Container>
         </div>
     )

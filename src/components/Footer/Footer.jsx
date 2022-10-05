@@ -8,10 +8,11 @@ import {
     Link,
     SimpleGrid,
     Stack,
-    Text,
     useColorModeValue,
 } from '@chakra-ui/react';
-
+import {
+    Link as LinkRouter,
+} from "react-router-dom";
 const Logo = (props) => {
     return (
         <svg
@@ -58,10 +59,6 @@ function Footer(
                     title: 'La nostra storia',
                     url: '/about',
                 },
-                {
-                    title: 'La nostra azienda',
-                    url: '/about#OurHistory',
-                },
             ],
         },
         {
@@ -106,6 +103,10 @@ function Footer(
                     templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr 1fr' }}
                     spacing={8}>
                     <Stack
+                        order={{
+                            base: 2,
+                            md: 0,
+                        }}
                         spacing={4}
                         justifyContent={'flex-end'}
                     >
@@ -121,7 +122,13 @@ function Footer(
                                 <ListHeader>{item.title}</ListHeader>
                                 {
                                     item.links.map( (link, index2) => (
-                                        <Link key={index2} href={link.url}>{link.title}</Link>
+                                        <Link
+                                            as={LinkRouter}
+                                            key={index2}
+                                            to={link.url}
+                                        >
+                                                {link.title}
+                                        </Link>
                                     ))
                                 }
                             </Stack>

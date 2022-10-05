@@ -14,7 +14,9 @@ import {Transition, CSSTransition} from 'react-transition-group';
 import ReactTransitionCollapse from 'react-transition-collapse';
 import {useBreakpointValue} from '@chakra-ui/react'
 import {useSpring, animated} from 'react-spring'
-
+import {
+    Link as LinkRouter,
+} from "react-router-dom";
 
 function Navbar(
     {
@@ -115,7 +117,8 @@ function Navbar(
                                 items.map((item, index) => (
                                     <li key={index}>
                                         <Link
-                                            href={item.path ?? ''}
+                                            as={LinkRouter}
+                                            to={item.path ?? ''}
                                             onClick={
                                                 !!item.children ?
                                                     event => {
@@ -171,7 +174,8 @@ function Navbar(
                                             return (
                                                 <li key={index}>
                                                     <Link
-                                                        href={item.path}
+                                                        as={LinkRouter}
+                                                        to={item.path ?? ''}
                                                     >
                                                         {item.title}
                                                     </Link>

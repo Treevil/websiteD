@@ -74,8 +74,7 @@ export const middleSectionText = {
     title: `LA NOSTRA ESPERIENZA A TUA DISPOSIZIONE`,
     subtitle: <>
         Da 25 anni localizziamo beni, <br/>
-        digitalizziamo servizi e salvaguardiamo la <br/>
-        sicurezza pubblica. <br/>
+        digitalizziamo servizi e salvaguardiamo la sicurezza pubblica.
     </>,
 }
 

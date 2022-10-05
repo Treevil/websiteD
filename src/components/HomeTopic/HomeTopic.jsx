@@ -26,7 +26,9 @@ function HomeTopic(
                 display={'flex'}
                 flexDirection={'column'}
                 alignItems={'center'}
-                w={'33%'}
+                w={{
+                    base: '100%',
+                }}
             >
                 {showImgLogo &&
                     <Image
@@ -39,6 +41,7 @@ function HomeTopic(
                         mb={'6rem'}
                         padding={
                             {
+                                base: 0,
                                 md: '0 2rem',
                                 xl: '0 4rem',
                             }
@@ -67,8 +70,7 @@ function HomeTopic(
                 </Box>
                 <Box
                     textAlign={{
-                        base: 'left',
-                        md: 'center',
+                        base: 'center',
                     }}
                 >
                     <HeaderBlue

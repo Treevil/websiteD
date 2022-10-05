@@ -103,7 +103,6 @@ function HomeMiddleSection(
             backgroundSize={'cover'}
             color={'brand.white'}
             backgroundPosition={'center center'}
-            p={'0 4rem'}
 
         >
             <Container
@@ -118,7 +117,13 @@ function HomeMiddleSection(
                 }
             >
             <VStack
-                w={'40%'}
+                w={
+                    {
+                        base: '100%',
+                        md: '50%',
+                        xl: '40%'
+                    }
+                }
                 justify={'center'}
                 px={useBreakpointValue({ base: 4, md: 8 })}
             >
@@ -129,12 +134,10 @@ function HomeMiddleSection(
                         fontWeight={700}
                         lineHeight={1.2}
                         fontSize={
-                            useBreakpointValue(
                                 {
-                                    base: '6rem',
-                                    md: '7xl'
+                                    base: '4.5rem',
+                                    xl: '5rem'
                                 }
-                            )
                         }
                     >
                         {text.title}
@@ -148,19 +151,36 @@ function HomeMiddleSection(
                     >
                         {text.subtitle}
                     </Paragraph>
-
                 </Stack>
             </VStack>
             <VStack
-                w={'60%'}
+                w={
+                    {
+                        base: '100%',
+                        md: '50%',
+                        xl: '60%'
+                    }
+                }
+                mt={{
+                    base: 20,
+                    md: 0,
+                }}
                 justify={'center'}
                 px={useBreakpointValue({ base: 4, md: 8 })}
             >
                 <Stack
-                    align={'flex-start'}
+                    align={
+                        {
+                            md: 'flex-start',
+                            base: 'center'
+                        }}
                     width={'full'}
                     justifyContent={'space-around'}
-                    direction={'row'}
+                    direction={
+                        {
+                            md: 'row',
+                            base: 'column'
+                        }}
                     spacing={10}
                 >
                     {

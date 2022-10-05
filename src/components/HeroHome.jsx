@@ -13,6 +13,7 @@ import {
 import Head from 'next/head';
 import TwentyFive from '../asset/25Years.png'
 import mainLogo from '../asset/mainLogo.png'
+import mainLogoSmart from '../asset/mainLogo3.png'
 import {
     useNavigate
 } from 'react-router-dom';
@@ -43,6 +44,12 @@ function HeroHome(
                     <Box>
                         <Image
                             src={mainLogo}
+                            display={
+                                {
+                                    base: "none",
+                                    md: "block",
+                                }
+                            }
                             h={
                                 {
                                     base: 250,
@@ -60,7 +67,27 @@ function HeroHome(
                             mr={'auto'}
                             maxWidth={'90%'}
                             my={5}
-                            alt={'25 Years anniversary'}
+                            alt={'Divitech Logo - 25 Years anniversary'}
+                        />
+                        <Image
+                            src={mainLogoSmart}
+                            display={
+                                {
+                                    md: "none",
+                                    base: "block",
+                                }
+                            }
+                            ml={
+                                {
+                                    base: "auto",
+                                    md: '8rem',
+                                    xl: '10rem',
+                                }
+                            }
+                            mr={'auto'}
+                            maxWidth={'90%'}
+                            my={5}
+                            alt={'Divitech Logo'}
                         />
                     </Box>
 

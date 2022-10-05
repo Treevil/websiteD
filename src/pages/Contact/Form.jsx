@@ -27,6 +27,8 @@ import TextButton from "../../components/Typography/TextButton";
 import {
     useLocation,
 } from "react-router-dom";
+import {formContent} from "../../config/content/Form.content";
+import {emailConfig} from "../../config/email.config";
 
 const initFormState = {
     firstName: '',
@@ -67,7 +69,7 @@ function Form(
                 return {
                     ...curr,
                     object: `${state.product}`,
-                    message: `Salve, vorrei maggiori informazioni su ${state.product}`
+                    message: `Buongiorno, vorrei maggiori informazioni in merito a ${state.product}`
                 }
             })
         }
@@ -92,34 +94,33 @@ function Form(
     const sendEmail = _ => {
 
         emailjs.send(
-            'service_unbce8d',
-            'template_99swgwu',
+            emailConfig.serviceId,
+            emailConfig.templateForm,
             formValues,
-            'vbpXCpvI5nr6MfOpf'
+            emailConfig.publicKey,
         )
             .then((result) => {
-                console.log(result.text);
                 setAlertData({
-                    show: true,
-                    error: false,
-                    title: 'Messaggio Inviato',
-                    subtitle: <>
-                        Grazie per averci contattato, ti risponderemo al più presto!
-                        <br/>
-                        <br/>
-                        <br/>
-                        <TextButton
-                            onClick={_ => {
-                                setAlertData(
-                                    el => {
-                                        return {...el, show: false}
-                                    }
-                                )
-                                setFormValues(initFormState);
-                            }}
-                        >
-                            Invia un nuovo messaggio?
-                        </TextButton>
+                        show: true,
+                        error: false,
+                        title: formContent.successAlert.title,
+                        subtitle: <>
+                            {formContent.successAlert.subtitle}
+                            <br/>
+                            <br/>
+                            <br/>
+                            <TextButton
+                                onClick={_ => {
+                                    setAlertData(
+                                        el => {
+                                            return {...el, show: false}
+                                        }
+                                    )
+                                    setFormValues(initFormState);
+                                }}
+                            >
+                                Invia un nuovo messaggio?
+                            </TextButton>
                         </>,
                         type: 'success',
                     }
@@ -152,11 +153,8 @@ function Form(
             return setAlertData({
                     show: true,
                     error: true,
-                    title: 'Errore dati',
-                    subtitle: <>
-                        Uno o più cambi obbligatori omessi. <br/>
-                        Completare il form e riprovare
-                    </>,
+                    title: formContent.failAlert.missingMandatoryFields.title,
+                    subtitle: formContent.failAlert.missingMandatoryFields.subtitle,
                     type: 'error',
                 }
             )
@@ -169,11 +167,8 @@ function Form(
             return setAlertData({
                     show: true,
                     error: true,
-                    title: 'Errore formato dati',
-                    subtitle: <>
-                        Uno o più cambi sono in un formato non corretto <br/>
-                        Controlla i dati e riprova
-                    </>,
+                    title: formContent.failAlert.wrongFormat.title,
+                    subtitle: formContent.failAlert.wrongFormat.subtitle,
                     type: 'error',
                 }
             )
@@ -198,10 +193,20 @@ function Form(
                     <Box p={4}>
                         <Grid templateColumns='repeat(6, 1fr)' gap={6}>
                             <GridItem
-                                colSpan={3}
+                                colSpan={{
+                                    base: 6,
+                                    md: 3,
+                                }}
+                                order={{
+                                    base: 2,
+                                    md: 1,
+                                }}
                                 w='100%'
                                 alignItems={'center'}
-                                justifyContent={'center'}
+                                justifyContent={{
+                                    base: 'flex-start',
+                                    md: 'center',
+                                }}
                                 display={'flex'}
                             >
                                 <Box>
@@ -228,7 +233,7 @@ function Form(
                                         </span>
                                         <span>
                                             <Link target={'_blank'} href={'https://goo.gl/maps/xboRLhLPHrgZE7tf9'}>
-                                                Via Lombardore 223 - 10040 <br/>Leinì (TO) - Italy
+                                               {formContent.infos.address}
                                             </Link>
                                         </span>
                                     </Paragraph>
@@ -252,7 +257,7 @@ function Form(
                                         </span>
                                         <span>
                                             <Link href={'tel:+390119981611'}>
-                                                +39 011 99 81 611
+                                                 {formContent.infos.phone}
                                             </Link>
                                         </span>
                                     </Paragraph>
@@ -276,7 +281,7 @@ function Form(
                                         </span>
                                         <span>
                                             <Link href={'mailto:info@divitech.it'}>
-                                                info@divitech.it
+                                                 {formContent.infos.email}
                                             </Link>
                                         </span>
                                     </Paragraph>
@@ -298,12 +303,21 @@ function Form(
                                             </span>
                                             <strong>Web</strong>
                                         </span>
-                                        <span>www.divitech.it</span>
+                                        <span>
+                                             {formContent.infos.website}
+                                        </span>
                                     </Paragraph>
                                 </Box>
                             </GridItem>
                             <GridItem
-                                colSpan={3}
+                                colSpan={{
+                                    base: 6,
+                                    md: 3,
+                                }}
+                                order={{
+                                    base: 1,
+                                    md: 2,
+                                }}
                                 w='100%'
                                 alignItems={'center'}
                                 display={'flex'}
@@ -347,7 +361,13 @@ function Form(
                                     </Collapse>
                                     {
                                         (!alertData.show || alertData.error) &&
-                                        <Box m={8} color="#0B0E3F">
+                                        <Box
+                                            m={{
+                                                base: 0,
+                                                md: 8,
+                                            }}
+                                            color="#0B0E3F"
+                                        >
                                             <VStack spacing={5}>
                                                 <Stack
                                                     direction={'row'}
@@ -496,7 +516,7 @@ function Form(
                                                             onClick={onSendClick}
                                                             disabled={isLoading}
                                                         >
-                                                            {isLoading? <Spinner /> : "Invia!"}
+                                                            {isLoading ? <Spinner/> : "Invia!"}
                                                         </Button>
                                                     </Stack>
                                                 </FormControl>

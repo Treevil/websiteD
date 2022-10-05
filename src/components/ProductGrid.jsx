@@ -31,19 +31,33 @@ function ProductGrid(
         pdfBrochure,
         moreInfoLink,
         maxWidthImg = '100%',
+        alternativeTitle,
     }
 ) {
     return (
-        <Container maxW={'7xl'} py={12} px={12}>
-            <Grid templateColumns='repeat(10, 1fr)' gap={20} my={'4rem'}>
+        <Container
+            maxW={'7xl'}
+            py={12}
+            px={12}
+            background={'#fff'}
+            m={'2rem auto'}
+        >
+            <Grid
+                templateColumns='repeat(10, 1fr)'
+                gap={20}
+                my={'4rem'}
+            >
                 <GridItem
-                    colSpan={6}
+                    colSpan={{
+                        base: 0,
+                        md: 6,
+                    }}
                     w='100%'
                 >
                 <Flex justifyContent={'center'}>
                     <Image
                         rounded={'md'}
-                        alt={`Immagine presentazione ${name}`}
+                        alt={`Prodotto ${name}`}
                         maxW={maxWidthImg}
                         src={
                             img
@@ -52,7 +66,10 @@ function ProductGrid(
                 </Flex>
                 </GridItem>
                 <GridItem
-                    colSpan={4}
+                    colSpan={{
+                        base: 10,
+                        md: 4,
+                    }}
                     w='100%'
                     display={'flex'}
                     flexDirection={'column'}
@@ -85,7 +102,7 @@ function ProductGrid(
                         lineHeight={'1'}
                         fontWeight={'bold'}
                     >
-                        I nostri clienti
+                        {alternativeTitle?? "I nostri clienti"}
                     </Heading>
                     <Stack
                         direction={'row'}
@@ -128,7 +145,7 @@ function ProductGrid(
                             to={'/Form'}
                             state={{product: name.charAt(0).toUpperCase() + name.slice(1)}}
                         >
-                        Ottieni più infomazioni
+                        Ottieni più Informazioni
                         </Link>
                     </TextButton>
                 </Stack>
